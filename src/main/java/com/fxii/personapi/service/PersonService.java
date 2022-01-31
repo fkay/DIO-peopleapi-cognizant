@@ -43,14 +43,19 @@ public class PersonService {
     }
 
     public PersonDTO findById(Long id) throws PesonNotFoundException {
-        //Optional<Person> p = personRepository.findById(id);
-        //if (p.isEmpty()) {
-        //    throw new PesonNotFoundException(id);
-        //}
-        //return personMapper.toDTO(p.get());
+        Person p = verifyIfExists(id);
 
-        Person p = personRepository.findById(id).
-                orElseThrow(() -> new PesonNotFoundException(id));
         return personMapper.toDTO(p);
+    }
+
+    public void deleteById(Long id) throws PesonNotFoundException {
+        verifyIfExists(id);
+
+        personRepository.deleteById(id);
+    }
+
+    private Person verifyIfExists(Long id) throws PesonNotFoundException {
+        return personRepository.findById(id).
+                orElseThrow(() -> new PesonNotFoundException(id));
     }
 }
