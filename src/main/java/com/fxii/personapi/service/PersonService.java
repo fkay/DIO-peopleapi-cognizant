@@ -6,6 +6,7 @@ import com.fxii.personapi.dto.request.PersonDTO;
 import com.fxii.personapi.entity.Person;
 import com.fxii.personapi.exception.PesonNotFoundException;
 import com.fxii.personapi.repositories.PersonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
     private final PersonRepository personRepository;
 
-    private final PersonMapper personMapper = PersonMapper.INSTANCE;
-
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
+    private final PersonMapper personMapper;// = PersonMapper.INSTANCE;
 
     public MessageResponseDTO createPerson(PersonDTO personDTO) {
         // convert DTO to Model
