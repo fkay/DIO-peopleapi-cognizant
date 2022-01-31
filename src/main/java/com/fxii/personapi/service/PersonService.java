@@ -1,14 +1,16 @@
 package com.fxii.personapi.service;
 
 import com.fxii.personapi.dto.MessageResponseDTO;
+import com.fxii.personapi.dto.mapper.PersonMapper;
 import com.fxii.personapi.dto.request.PersonDTO;
 import com.fxii.personapi.entity.Person;
-import com.fxii.personapi.dto.mapper.PersonMapper;
+import com.fxii.personapi.exception.PesonNotFoundException;
 import com.fxii.personapi.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,5 +40,17 @@ public class PersonService {
         return allPeople.stream()
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(Long id) throws PesonNotFoundException {
+        //Optional<Person> p = personRepository.findById(id);
+        //if (p.isEmpty()) {
+        //    throw new PesonNotFoundException(id);
+        //}
+        //return personMapper.toDTO(p.get());
+
+        Person p = personRepository.findById(id).
+                orElseThrow(() -> new PesonNotFoundException(id));
+        return personMapper.toDTO(p);
     }
 }
