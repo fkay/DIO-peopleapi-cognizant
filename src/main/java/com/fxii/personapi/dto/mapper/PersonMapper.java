@@ -1,4 +1,4 @@
-package com.fxii.personapi.mapper;
+package com.fxii.personapi.dto.mapper;
 
 import com.fxii.personapi.dto.request.PersonDTO;
 import com.fxii.personapi.entity.Person;

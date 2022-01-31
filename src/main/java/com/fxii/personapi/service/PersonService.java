@@ -3,10 +3,13 @@ package com.fxii.personapi.service;
 import com.fxii.personapi.dto.MessageResponseDTO;
 import com.fxii.personapi.dto.request.PersonDTO;
 import com.fxii.personapi.entity.Person;
-import com.fxii.personapi.mapper.PersonMapper;
+import com.fxii.personapi.dto.mapper.PersonMapper;
 import com.fxii.personapi.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -28,5 +31,12 @@ public class PersonService {
                 .builder()
                 .message(String.format("Created person %s with ID %d", p.getFirstName(), p.getId()))
                 .build();
+    }
+
+    public List<PersonDTO> listAll() {
+        List<Person> allPeople = personRepository.findAll();
+        return allPeople.stream()
+                .map(personMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
