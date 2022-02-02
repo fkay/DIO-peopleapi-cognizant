@@ -1,6 +1,8 @@
 package com.fxii.personapi.service;
 
 import com.fxii.personapi.dto.request.UserDTO;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +13,10 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserDetailServiceImpl implements UserDetailsService {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -25,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     private UserDTO findUser(String username) {
         if (username.equalsIgnoreCase("admin")) {
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(); // di
             return UserDTO.builder()
                     .userName("admin")
                     .password(bCryptPasswordEncoder.encode("admin"))
