@@ -27,3 +27,37 @@ Foram utilizados no projeto:
 * Conta no GitHub para o armazenamento do seu projeto na nuvem.
 * Conta no Heroku para o deploy do projeto na nuvem
 
+## Melhorias
+Dando sequencia no bootcamp foi apresentado o websecurity do
+Spring Boot, assim foi incorporado basicamente os processos
+de autenticação e autorização na API, usando JWT.
+
+O usuário está hardcoded como admin com senha admin, e os 
+endponints ficaram:
+* Teste: 
+```
+http://localhost:8080/api/v1/people/teste
+```
+* Login (body com json {userName, password}):
+```
+http://localhost:8080/api/v1/login
+```
+* CRUD pessoas (GET, PUT, POST, DELETE)
+```
+http://localhost:8080/api/v1/people
+```
+* Referência id pessoa
+```
+http://localhost:8080/api/v1/people/id
+```
+
+## Próximos passos
+* gravar no banco de dados as senhas criptografadas.
+
+## Tips
+Para conseguir popular a tabela Users com o script 
+no arquivo *resources/data.sql* foi necessário incluir a 
+seguinte instrução no arquivo *application.properties*.
+```
+spring.jpa.defer-datasource-initialization=true
+```
