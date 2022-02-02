@@ -51,6 +51,9 @@ http://localhost:8080/api/v1/people
 http://localhost:8080/api/v1/people/id
 ```
 
+## Próximos passos
+* gravar no banco de dados as senhas criptografadas.
+
 ## Tips
 Para conseguir popular a tabela Users com o script 
 no arquivo *resources/data.sql* foi necessário incluir a 
