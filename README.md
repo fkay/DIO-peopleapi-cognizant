@@ -50,3 +50,11 @@ http://localhost:8080/api/v1/people
 ```
 http://localhost:8080/api/v1/people/id
 ```
+
+## Tips
+Para conseguir popular a tabela Users com o script 
+no arquivo *resources/data.sql* foi necessário incluir a 
+seguinte instrução no arquivo *application.properties*.
+```
+spring.jpa.defer-datasource-initialization=true
+```
